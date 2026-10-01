@@ -42,3 +42,39 @@ resetBtn.addEventListener("click", () => {
   seconds = 0;
   timer.textContent = formatTime(seconds);
 });
+
+// --------------------
+// таймер зворотнього відліку
+
+const reversCountTimer = document.querySelector(".count-down-timer");
+const reversCountTimerButton = document.querySelector(".start-count-down");
+const reversCountTimerStopButton = document.querySelector(
+  ".start-count-down-stop",
+);
+
+let minuts = 5;
+let callDownSeconds = minuts * 1;
+let timerIsActive = false;
+reversCountTimerButton.addEventListener("click", () => {
+  if (timerIsActive) {
+    return;
+  }
+    timerIsActive = true;
+
+  const id = setInterval(() => {
+    callDownSeconds -= 1;
+    reversCountTimer.textContent = formatTime(callDownSeconds);
+
+    if (callDownSeconds <= 0) {
+      clearInterval(id);
+      timerIsActive = false;
+      alert("Час вийшов!");
+    }
+  }, 1000);
+
+});
+
+// reversCountTimerStopButton.addEventListener("click", () => {
+//   clearInterval(id);
+//   timerIsActive = false
+// })
